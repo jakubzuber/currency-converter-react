@@ -1,0 +1,22 @@
+.form__labelText {
+    display: inline-block;
+    width: 100%;
+    max-width: 180px;
+    margin-right: 5px;
+  }
+  
+  .form__field {
+    border: 2px solid rgb(92, 158, 228);
+    padding: 5px;
+    width: 100%;
+    max-width: 400px;
+    border-radius: 10px;
+  }
+  
+  .form__field:hover {
+    background-color: rgb(211, 208, 208);
+  }
+  
+  .form__field:active {
+    background-color: rgb(224, 191, 191);
+  }
