@@ -1,11 +1,11 @@
-.form__labelText {
+.input__label {
     display: inline-block;
     width: 100%;
     max-width: 180px;
     margin-right: 5px;
   }
   
-  .form__field {
+  .input__ValueField {
     border: 2px solid rgb(92, 158, 228);
     padding: 5px;
     width: 100%;
@@ -13,10 +13,10 @@
     border-radius: 10px;
   }
   
-  .form__field:hover {
+  .input__ValueField:hover {
     background-color: rgb(211, 208, 208);
   }
   
-  .form__field:active {
+  .input__ValueField:active {
     background-color: rgb(224, 191, 191);
   }

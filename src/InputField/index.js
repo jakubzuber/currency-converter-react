@@ -1,12 +1,12 @@
-
+import "./style.css"
 
 const CurrencyInputField = () => (
     <label>
-        <span className="form__labelText">
+        <span className="input__label">
             Amount:*
         </span>
         <input
-            className="form__field"
+            className="input__ValueField"
             placeholder="Provide amount"
         />
     </label>
