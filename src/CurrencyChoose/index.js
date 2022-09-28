@@ -1,15 +1,14 @@
 
 import "./style.css"
 
-const ConversionCurrencyFields = ({titleOfLine}) => (
+const ConversionCurrencyFields = ({titleOfLine, currencyList}) => (
     <p>
         <label>
             <span className="input__labelText">{titleOfLine}</span>
             <select className="input__CurrencyField">
-                <option value="pln">PLN</option>
-                <option value="eur">EUR</option>
-                <option value="gbp">GBP</option>
-                <option value="hkd">HKD</option>
+                {currencyList.map(currency => (
+                    <option key={currency.id}>{currency.name}</option>
+                ))}
             </select>
         </label>
     </p>
