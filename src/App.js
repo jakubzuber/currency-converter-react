@@ -29,8 +29,6 @@ function App() {
     const onChangeOutCurrency = (newOutCurrency) => {
         setOutCurrency(newOutCurrency)
     };
-
-
     
     console.log(inCurrency)
     console.log(inValue)
