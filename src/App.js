@@ -7,7 +7,7 @@ import Form from './Form';
 import Result from './OutputField'
 import { useEffect, useState } from 'react';
 
-const API_URL = "http://api.nbp.pl/api/exchangerates/tables/a/last/1/"
+const API_URL = "https://api.nbp.pl/api/exchangerates/tables/a/last/1/"
 
 function App() {
 
