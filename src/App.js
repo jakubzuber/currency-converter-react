@@ -20,11 +20,15 @@ function App() {
             setOptions(data[0].rates)
             setInCurrency(data[0].rates[0].code)
             setOutCurrency(data[0].rates[0].code)
+            setDate(data[0].effectiveDate)
           })}, [])
 
+          
+          
     const [inCurrency, setInCurrency] = useState();
     const [inValue, setInValue] = useState(0);
     const [outCurrency, setOutCurrency] = useState();
+    const [date, setDate] = useState()
 
     const onChangeInCurrency = (newInCurrency) => {
         setInCurrency(newInCurrency)
@@ -39,6 +43,7 @@ function App() {
     };
     
     let result = "";
+    let currentDate = "";
 
     const calculations = () => {
         if (inCurrency != null && outCurrency != null) {
@@ -46,13 +51,14 @@ function App() {
             let outRate = options.find(({code}) => code === outCurrency).mid
             let inSideResult = +inValue * inRate
             result = (inSideResult / outRate).toFixed(2)
+            currentDate = date
         };
     };
 
     calculations();
 
     return (
-        <Form>
+        <Form currentDate={currentDate}>
             <ConversionCurrencyFields
                 titleOfLine="Conversion from:"
                 options={options}
@@ -67,7 +73,9 @@ function App() {
                 options={options}
                 onChange={onChangeOutCurrency}
             />
-            <Result result={result} />
+            <Result 
+            result={result} 
+            />
         </Form>
     );
 }

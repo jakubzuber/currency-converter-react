@@ -1,6 +1,6 @@
 import "./style.css"
 
-const CurrencyInputField = ({onChange,inValue}) => {
+const CurrencyInputField = ({onChange, inValue}) => {
 
     const changeInValue = (event) => {
         onChange(event.target.value)
