@@ -41,10 +41,12 @@ function App() {
     let result = "";
 
     const calculations = () => {
-        let inRate = options.find(({code}) => code === inCurrency).mid
-        let outRate = options.find(({code}) => code === outCurrency).mid
-        let inSideResult = +inValue * inRate
-        result = (inSideResult / outRate).toFixed(2)
+        if (inCurrency != null && outCurrency != null) {
+            let inRate = options.find(({code}) => code === inCurrency).mid
+            let outRate = options.find(({code}) => code === outCurrency).mid
+            let inSideResult = +inValue * inRate
+            result = (inSideResult / outRate).toFixed(2)
+        };
     };
 
     calculations();
