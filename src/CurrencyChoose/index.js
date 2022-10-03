@@ -17,7 +17,7 @@ const ConversionCurrencyFields = ({titleOfLine, options, onChange}) => {
                     onChange={onChangeCurrency}
                 >
                     {options.map(currency => (
-                        <option key={currency.currency}>{currency.code}</option>
+                        <option key={currency.currency}>{currency.code+ " // " + currency.currency}</option>
                     ))}
                 </select>
             </label>

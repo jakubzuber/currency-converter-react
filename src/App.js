@@ -7,24 +7,25 @@ import Form from './Form';
 import Result from './OutputField'
 import { useEffect, useState } from 'react';
 
-const API_URL = "http://api.nbp.pl/api/exchangerates/tables/a/last/1/" 
+const API_URL = "http://api.nbp.pl/api/exchangerates/tables/a/last/1/"
 
 function App() {
 
-     const [options, setOptions] = useState ([])
-  
-      useEffect(() => {
-          fetch(API_URL)
-          .then(res => res.json())
-          .then(data => {
-            setOptions(data[0].rates)
-            setInCurrency(data[0].rates[0].code)
-            setOutCurrency(data[0].rates[0].code)
-            setDate(data[0].effectiveDate)
-          })}, [])
+    const [options, setOptions] = useState([])
 
-          
-          
+    useEffect(() => {
+        fetch(API_URL)
+            .then(res => res.json())
+            .then(data => {
+                setOptions(data[0].rates)
+                setInCurrency(`${data[0].rates[0].code} // ${data[0].rates[0].currency}`)
+                setOutCurrency(`${data[0].rates[0].code} // ${data[0].rates[0].currency}`)
+                setDate(data[0].effectiveDate)
+            })
+    }, [])
+
+
+
     const [inCurrency, setInCurrency] = useState();
     const [inValue, setInValue] = useState(0);
     const [outCurrency, setOutCurrency] = useState();
@@ -35,23 +36,26 @@ function App() {
     };
 
     const changeInValue = (newValue) => {
-        setInValue(newValue)
+        if (newValue >= 0) {
+            setInValue(newValue)
+        };
+        return
     };
 
     const onChangeOutCurrency = (newOutCurrency) => {
         setOutCurrency(newOutCurrency)
     };
-    
+
     let result = "";
     let currentDate = "";
 
     const calculations = () => {
         if (inCurrency != null && outCurrency != null) {
-            let inRate = options.find(({code}) => code === inCurrency).mid
-            let outRate = options.find(({code}) => code === outCurrency).mid
-            let inSideResult = +inValue * inRate
-            result = (inSideResult / outRate).toFixed(2)
-            currentDate = date
+            let inRate = options.find(({ code, currency }) => (`${code} // ${currency}`) === inCurrency).mid;
+            let outRate = options.find(({ code, currency }) => (`${code} // ${currency}`) === outCurrency).mid;
+            let inSideResult = +inValue * inRate;
+            result = (inSideResult / outRate).toFixed(2);
+            currentDate = date;
         };
     };
 
@@ -73,8 +77,8 @@ function App() {
                 options={options}
                 onChange={onChangeOutCurrency}
             />
-            <Result 
-            result={result} 
+            <Result
+                result={result}
             />
         </Form>
     );
