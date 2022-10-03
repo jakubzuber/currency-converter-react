@@ -1,7 +1,7 @@
 
 import "./style.css"
 
-const ConversionCurrencyFields = ({titleOfLine, currencyList, onChange}) => {
+const ConversionCurrencyFields = ({titleOfLine, options, onChange}) => {
 
     const onChangeCurrency = (event) => {
         onChange(event.target.value)
@@ -13,11 +13,11 @@ const ConversionCurrencyFields = ({titleOfLine, currencyList, onChange}) => {
                 <span className="input__labelText">{titleOfLine}</span>
                 <select
                     className="input__CurrencyField"
-                    value={currencyList.name}
+                    value={options.currency}
                     onChange={onChangeCurrency}
                 >
-                    {currencyList.map(currency => (
-                        <option key={currency.id}>{currency.name}</option>
+                    {options.map(currency => (
+                        <option key={currency.currency}>{currency.code}</option>
                     ))}
                 </select>
             </label>
