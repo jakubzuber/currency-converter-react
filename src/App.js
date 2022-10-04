@@ -23,7 +23,21 @@ function App() {
     const [inCurrency, setInCurrency] = useState();
     const [inValue, setInValue] = useState(0);
     const [outCurrency, setOutCurrency] = useState();
-    const [date, setDate] = useState()
+    const [date, setDate] = useState();
+    const [dateAndTime, setDateAndTime] = useState(new Date());
+
+    setInterval(() => {
+        setDateAndTime(new Date())
+    }, 1 * 1000);
+
+    const renderDate = dateAndTime.toLocaleDateString("en-EN" , {
+        weekday: "long", 
+        day: "numeric", 
+        month: "long", 
+        year: "numeric"
+    })
+
+    const renderTime = dateAndTime.toLocaleTimeString("en-EN");
 
     const onChangeInCurrency = (newInCurrency) => {
         setInCurrency(newInCurrency)
@@ -41,7 +55,7 @@ function App() {
     };
 
     let result = "";
-    let currentDate = "";
+    let rateDate = "";
 
     const calculations = () => {
         if (inCurrency != null && outCurrency != null) {
@@ -49,14 +63,18 @@ function App() {
             let outRate = options.find(({ code, currency }) => (`${code} // ${currency}`) === outCurrency).mid;
             let fromInRateToOutRate = +inValue * inRate;
             result = (fromInRateToOutRate / outRate).toFixed(2);
-            currentDate = date;
+            rateDate = date;
         };
     };
 
-    calculations();
+    calculations(); 
 
     return (
-        <Form currentDate={currentDate}>
+        <Form 
+        rateDate={rateDate}
+        renderDate={renderDate}
+        renderTime={renderTime}
+        >
             <ConversionCurrencyFields
                 titleOfLine="Conversion from:"
                 options={options}
