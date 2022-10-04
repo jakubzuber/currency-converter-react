@@ -1,7 +1,5 @@
-
-import './App.css';
 import "./style.css";
-import ConversionCurrencyFields from './CurrencyChoose';
+import ConversionCurrencyFields from './CurrencySelector';
 import CurrencyInputField from './InputField';
 import Form from './Form';
 import Result from './OutputField'
@@ -10,9 +8,7 @@ import { useEffect, useState } from 'react';
 const API_URL = "https://api.nbp.pl/api/exchangerates/tables/a/last/1/"
 
 function App() {
-
     const [options, setOptions] = useState([])
-
     useEffect(() => {
         fetch(API_URL)
             .then(res => res.json())
@@ -23,8 +19,6 @@ function App() {
                 setDate(data[0].effectiveDate)
             })
     }, [])
-
-
 
     const [inCurrency, setInCurrency] = useState();
     const [inValue, setInValue] = useState(0);
@@ -53,8 +47,8 @@ function App() {
         if (inCurrency != null && outCurrency != null) {
             let inRate = options.find(({ code, currency }) => (`${code} // ${currency}`) === inCurrency).mid;
             let outRate = options.find(({ code, currency }) => (`${code} // ${currency}`) === outCurrency).mid;
-            let inSideResult = +inValue * inRate;
-            result = (inSideResult / outRate).toFixed(2);
+            let fromInRateToOutRate = +inValue * inRate;
+            result = (fromInRateToOutRate / outRate).toFixed(2);
             currentDate = date;
         };
     };

@@ -2,11 +2,9 @@
 import "./style.css"
 
 const ConversionCurrencyFields = ({titleOfLine, options, onChange}) => {
-
     const onChangeCurrency = (event) => {
         onChange(event.target.value)
     };
-
     return (
         <p>
             <label>

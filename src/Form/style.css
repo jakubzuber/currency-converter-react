@@ -21,6 +21,7 @@
 .form__annotation {
   font-size: 11px;
   text-decoration: underline;
+  text-decoration-color: rgb(92, 158, 228);
 }
 
 .form__title {
