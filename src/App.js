@@ -3,10 +3,10 @@ import ConversionCurrencyFields from './CurrencySelector';
 import CurrencyInputField from './InputField';
 import Form from './Form';
 import Result from './OutputField'
+import Clock from "./Clock";
 import { useEffect, useState } from 'react';
 
 const API_URL = "https://api.nbp.pl/api/exchangerates/tables/a/last/1/"
-
 function App() {
     const [options, setOptions] = useState([])
     useEffect(() => {
@@ -24,20 +24,7 @@ function App() {
     const [inValue, setInValue] = useState(0);
     const [outCurrency, setOutCurrency] = useState();
     const [date, setDate] = useState();
-    const [dateAndTime, setDateAndTime] = useState(new Date());
 
-    setInterval(() => {
-        setDateAndTime(new Date())
-    }, 1 * 1000);
-
-    const renderDate = dateAndTime.toLocaleDateString("en-EN" , {
-        weekday: "long", 
-        day: "numeric", 
-        month: "long", 
-        year: "numeric"
-    })
-
-    const renderTime = dateAndTime.toLocaleTimeString("en-EN");
 
     const onChangeInCurrency = (newInCurrency) => {
         setInCurrency(newInCurrency)
@@ -67,14 +54,13 @@ function App() {
         };
     };
 
-    calculations(); 
+    calculations();
 
     return (
-        <Form 
-        rateDate={rateDate}
-        renderDate={renderDate}
-        renderTime={renderTime}
+        <Form
+            rateDate={rateDate}
         >
+            <Clock />
             <ConversionCurrencyFields
                 titleOfLine="Conversion from:"
                 options={options}
