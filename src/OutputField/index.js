@@ -1,10 +1,10 @@
 
-import "./style.css";
+import { ResultField } from "./styled";
 
 const Result = ({ result }) => (
     <p>
-        <span className="form__labelText">Converted amount:</span>
-        <strong className="form__result">{result}</strong>
+        <span>Converted amount:</span>
+        <ResultField>{result}</ResultField>
     </p>
 );
 
