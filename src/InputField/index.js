@@ -1,4 +1,4 @@
-import "./style.css"
+import { InputTitle, InputField } from "./styled"
 
 const CurrencyInputField = ({ onChange, inValue }) => {
 
@@ -8,12 +8,11 @@ const CurrencyInputField = ({ onChange, inValue }) => {
 
     return (
         <label>
-            <span className="input__label">
+            <InputTitle>
                 Amount:*
-            </span>
-            <input
+            </InputTitle>
+            <InputField
                 autoFocus={true}
-                className="input__ValueField"
                 placeholder="Provide amount"
                 type="number"
                 value={inValue}
