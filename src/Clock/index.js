@@ -17,9 +17,9 @@ const Clock = () => {
 
   return (
     <div className="dateTime">
-    Data i godzina:
+    Date & hour:
     {" "}
-    {dateAndTime.toLocaleString(undefined, {
+    {dateAndTime.toLocaleString("en-EN" , {
         weekday: "long",
         hour: "2-digit",
         minute: "2-digit",
