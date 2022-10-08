@@ -1,15 +1,15 @@
 
-import "./style.css"
+import { Main, Field, Title, Annotation } from "./styled"
 
 const Form = ({ children, rateDate}) => (
-    <form className="body">
-        <fieldset className="form__fieldset">
-            <legend className="form__title">Currency Calculator</legend>
+    <Main>
+        <Field>
+            <Title>Currency Calculator</Title>
             {children}
-            <p className="form__annotation">Conversion rate from {rateDate}</p>
-            <p className="form__annotation">*required fields</p>
-        </fieldset>
-    </form>
+            <Annotation>Conversion rate from {rateDate}</Annotation>
+            <Annotation>*required fields</Annotation>
+        </Field>
+    </Main>
 );
 
 export default Form;
