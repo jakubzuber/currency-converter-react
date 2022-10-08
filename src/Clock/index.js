@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "./style.css";
+import { ClockField } from "./styled"
 
 
 const Clock = () => {
@@ -16,7 +16,7 @@ const Clock = () => {
   }, []);
 
   return (
-    <div className="dateTime">
+    <ClockField>
     Date & hour:
     {" "}
     {dateAndTime.toLocaleString("en-EN" , {
@@ -28,7 +28,7 @@ const Clock = () => {
         month: "long"
 
     })}
-    </div>
+    </ClockField>
 )
 };
 
