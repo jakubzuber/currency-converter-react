@@ -1,19 +1,9 @@
-import { useEffect, useState } from "react";
 import { ClockField } from "./styled"
+import { useCurrentDate } from "./useCurrentDate"
 
 
 const Clock = () => {
-  const [dateAndTime, setDateAndTime] = useState(new Date());
-
-  useEffect(() => {
-    const intervalID = setInterval(() => {
-      setDateAndTime(new Date());
-    }, 1000);
-
-    return () => {
-      clearInterval(intervalID);
-    };
-  }, []);
+  const dateAndTime = useCurrentDate();
 
   return (
     <ClockField>
