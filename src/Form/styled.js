@@ -30,9 +30,3 @@ export const Title = styled.legend`
   border: 3px solid black;
   border-radius: 10px;
 `;
-
-export const Annotation = styled.p`
-  font-size: 11px;
-  text-decoration: underline;
-  text-decoration-color: rgb(92, 158, 228);
-`;

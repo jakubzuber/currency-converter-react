@@ -5,12 +5,14 @@ import Form from './Form';
 import Result from './OutputField'
 import Clock from "./Clock";
 import { useEffect, useState } from 'react';
+import Loading from "./LoadingsAndErrors"
 
 const API_URL = "https://api.nbp.pl/api/exchangerates/tables/a/last/1/"
 function App() {
     const [options, setOptions] = useState([])
     useEffect(() => {
-        fetch(API_URL)
+        const fetchRates = () => {
+            fetch(API_URL)
             .then(res => res.json())
             .then(data => {
                 setOptions(data[0].rates)
@@ -18,12 +20,19 @@ function App() {
                 setOutCurrency(`${data[0].rates[0].code} // ${data[0].rates[0].currency}`)
                 setDate(data[0].effectiveDate)
             })
+            .catch(error => console.error(error))
+        }
+        setTimeout(fetchRates, 2 * 1000)
     }, [])
 
-    const [inCurrency, setInCurrency] = useState();
+
+    const [inCurrency, setInCurrency] = useState(null);
     const [inValue, setInValue] = useState(0);
-    const [outCurrency, setOutCurrency] = useState();
+    const [outCurrency, setOutCurrency] = useState(null);
     const [date, setDate] = useState();
+
+    console.log(inCurrency)
+    console.log(outCurrency)
 
 
     const onChangeInCurrency = (newInCurrency) => {
@@ -57,27 +66,33 @@ function App() {
     calculations();
 
     return (
-        <Form
-            rateDate={rateDate}
-        >
+        <Form>
             <Clock />
-            <ConversionCurrencyFields
-                titleOfLine="Conversion from:"
-                options={options}
-                onChange={onChangeInCurrency}
-            />
-            <CurrencyInputField
-                inValue={inValue}
-                onChange={changeInValue}
-            />
-            <ConversionCurrencyFields
-                titleOfLine="Conversion to:"
-                options={options}
-                onChange={onChangeOutCurrency}
-            />
-            <Result
-                result={result}
-            />
+            {(inCurrency === null || outCurrency === null) && (
+                <Loading/>
+            )}
+            {(inCurrency !== null || outCurrency !== null) && (
+                <>
+                    <ConversionCurrencyFields
+                        titleOfLine="Conversion from:"
+                        options={options}
+                        onChange={onChangeInCurrency}
+                    />
+                    <CurrencyInputField
+                        inValue={inValue}
+                        onChange={changeInValue}
+                    />
+                    <ConversionCurrencyFields
+                        titleOfLine="Conversion to:"
+                        options={options}
+                        onChange={onChangeOutCurrency}
+                    />
+                    <Result
+                        result={result}
+                        rateDate={rateDate}
+                    />
+                </>
+            )}
         </Form>
     );
 }
