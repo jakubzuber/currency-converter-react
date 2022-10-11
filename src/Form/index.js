@@ -1,7 +1,7 @@
 
 import { Main, Field, Title } from "./styled"
 
-const Form = ({ children, rateDate}) => (
+const Form = ({ children}) => (
     <Main>
         <Field>
             <Title>Currency Calculator</Title>

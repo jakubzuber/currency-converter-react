@@ -5,7 +5,8 @@ import Form from './Form';
 import Result from './OutputField'
 import Clock from "./Clock";
 import { useEffect, useState } from 'react';
-import Loading from "./LoadingsAndErrors"
+import Download from "./DownloadData"
+import Error from "./Error"
 
 const API_URL = "https://api.nbp.pl/api/exchangerates/tables/a/last/1/"
 function App() {
@@ -13,6 +14,13 @@ function App() {
     useEffect(() => {
         const fetchRates = () => {
             fetch(API_URL)
+            .then(res => {
+                if (!res.ok) {
+                    throw new Error(res.statusText);
+                }
+                setError("done")
+                return res;
+            })
             .then(res => res.json())
             .then(data => {
                 setOptions(data[0].rates)
@@ -20,20 +28,16 @@ function App() {
                 setOutCurrency(`${data[0].rates[0].code} // ${data[0].rates[0].currency}`)
                 setDate(data[0].effectiveDate)
             })
-            .catch(error => console.error(error))
+            .catch(() => setError("dataLoadingFaild"))
         }
         setTimeout(fetchRates, 2 * 1000)
     }, [])
 
-
+    const [error, setError] = useState("")
     const [inCurrency, setInCurrency] = useState(null);
     const [inValue, setInValue] = useState(0);
     const [outCurrency, setOutCurrency] = useState(null);
     const [date, setDate] = useState();
-
-    console.log(inCurrency)
-    console.log(outCurrency)
-
 
     const onChangeInCurrency = (newInCurrency) => {
         setInCurrency(newInCurrency)
@@ -68,10 +72,16 @@ function App() {
     return (
         <Form>
             <Clock />
-            {(inCurrency === null || outCurrency === null) && (
-                <Loading/>
-            )}
-            {(inCurrency !== null || outCurrency !== null) && (
+            {(error === "") && (
+                <Download
+                />
+            )};
+
+            {(error === "dataLoadingFaild") && (
+                <Error/>
+            )};
+
+            {(error === "done") && (
                 <>
                     <ConversionCurrencyFields
                         titleOfLine="Conversion from:"

@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
-export const LoadingStyle = styled.p`
+export const Errors = styled.p`
     text-align: center;
     font-size: 30px;
-
 `;
