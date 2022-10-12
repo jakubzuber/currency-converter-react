@@ -30,11 +30,11 @@ function App() {
             {(error === "") && (
                 <Download
                 />
-            )};
+            )}
 
             {(error === "dataLoadingFaild") && (
                 <Error/>
-            )};
+            )}
 
             {(error === "done") && (
                 <>

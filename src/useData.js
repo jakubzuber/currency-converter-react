@@ -16,9 +16,10 @@ export const useData = () => {
                 })
                 .then(res => res.json())
                 .then(data => {
+                    const firstCurrency = (`${data[0].rates[0].code} // ${data[0].rates[0].currency}`)
                     setOptions(data[0].rates)
-                    setInCurrency(`${data[0].rates[0].code} // ${data[0].rates[0].currency}`)
-                    setOutCurrency(`${data[0].rates[0].code} // ${data[0].rates[0].currency}`)
+                    setInCurrency(firstCurrency)
+                    setOutCurrency(firstCurrency)
                     setDate(data[0].effectiveDate)
                 })
                 .catch(() => setError("dataLoadingFaild"))
